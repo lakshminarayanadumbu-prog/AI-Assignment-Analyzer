@@ -1,0 +1,6 @@
+Flask
+nltk
+spacy
+scikit-learn
+language-tool-python
+gunicorn
