@@ -2,20 +2,26 @@ import language_tool_python
 
 def check_grammar(text):
 
-    tool = language_tool_python.LanguageToolPublicAPI("en-US")
+    try:
 
-    matches = tool.check(text)
+        tool = language_tool_python.LanguageToolPublicAPI("en-US")
 
-    grammar_errors = len(matches)
+        matches = tool.check(text)
 
-    suggestions = []
+        grammar_errors = len(matches)
 
-    for match in matches[:5]:
-        suggestions.append(match.message)
+        suggestions = []
 
-    tool.close()
+        for match in matches[:5]:
+            suggestions.append(match.message)
 
-    return grammar_errors, suggestions
+        tool.close()
+
+        return grammar_errors, suggestions
+
+    except Exception:
+
+        return 0, ["Grammar checking is temporarily unavailable."]
 
 from .preprocessing import clean_text, get_words
 from sklearn.feature_extraction.text import TfidfVectorizer
