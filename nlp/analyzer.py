@@ -2,7 +2,7 @@ import language_tool_python
 
 def check_grammar(text):
 
-    tool = language_tool_python.LanguageTool("en-US")
+    tool = language_tool_python.LanguageToolPublicAPI("en-US")
 
     matches = tool.check(text)
 
