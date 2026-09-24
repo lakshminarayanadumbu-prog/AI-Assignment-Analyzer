@@ -59,6 +59,12 @@
             <label for="assignmentText">
                 Enter Assignment Text
             </label>
+            
+            <label for="pdfFile">Upload Assignment PDF</label>
+            <input type="file" id="pdfFile" accept=".pdf">
+
+            <p>OR paste your assignment text below:</p>
+
 
             <textarea
                 id="assignmentText"
@@ -112,7 +118,74 @@
                     <p id="grammarErrors">--</p>
                 </div>
 
+                <div class="score-breakdown">
+
+                   <h2>📊 Detailed Score Breakdown</h2>
+
+                   <div class="score-item">
+                    <div>
+                         <span>Grammar</span>
+                         <span id="grammarScore">0/10</span>
+                    </div>
+                    <div class="score-line">
+                         <div id="grammarProgress"></div>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                <div>
+                   <span>Structure</span>
+                   <span id="structureScore">0/10</span>
+                </div>
+                <div class="score-line">
+                   <div id="structureProgress"></div>
+                </div>
             </div>
+
+            <div class="score-item">
+              <div>
+                   <span>Keywords</span>
+                   <span id="keywordScore">0/10</span>
+               </div>
+               <div class="score-line">
+                   <div id="keywordProgress"></div>
+                </div>
+            </div>
+
+           <div class="score-item">
+               <div>
+                   <span>Content</span>
+                   <span id="contentScore">0/10</span>
+                </div>
+                <div class="score-line">
+                    <div id="contentProgress"></div>
+                </div>
+            </div>
+
+           <div class="score-item">
+              <div>
+                   <span>Readability</span>
+                   <span id="readabilityScore">0/10</span>
+               </div>
+               <div class="score-line">
+                   <div id="readabilityProgress"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="report-download">
+
+          <button id="downloadReportButton">
+            📥 Download Analysis Report
+           </button>
+
+        </div>
+
+
+            </div>
+
 
 
             <div class="details">

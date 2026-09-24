@@ -204,15 +204,46 @@ def analyze_text(text):
     # -----------------------------
     # Return Results
     # -----------------------------
+    
+        # Detailed score breakdown
+
+    grammar_score = 10
+    if grammar_errors > 0:
+        grammar_score = max(0, 10 - grammar_errors)
+
+    structure_score = min(len(sections) * 2, 10)
+
+    keyword_score = min(len(keywords) * 2, 10)
+
+    content_score = 5
+
+    if word_count >= 100:
+        content_score = 8
+
+    if word_count >= 250:
+        content_score = 10
+
+    readability_score = 10
+
+    if readability == "Easy":
+        readability_score = 8
+    elif readability == "Good":
+        readability_score = 9
 
     return {
         "quality_score": quality_score,
         "confidence": confidence,
         "word_count": word_count,
         "readability": readability,
+        "grammar_errors": grammar_errors,
+        "grammar_score": grammar_score,
+        "structure_score": structure_score,
+        "keyword_score": keyword_score,
+        "content_score": content_score,
+        "readability_score": readability_score,
         "keywords": ", ".join(keywords),
         "sections": ", ".join(sections),
         "suggestions": " ".join(suggestions),
-        "grammar_errors": grammar_errors,
         "grammar_suggestions": grammar_suggestions
     }
+    

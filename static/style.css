@@ -437,3 +437,84 @@ footer {
 
     transition: width 0.8s ease;
 }
+.score-breakdown {
+    background: white;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.score-breakdown h2 {
+    margin-bottom: 25px;
+    color: #222;
+}
+
+.score-item {
+    margin-bottom: 22px;
+}
+
+.score-item > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.score-line {
+    width: 100%;
+    height: 10px;
+    background: #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.score-line div {
+    height: 100%;
+    width: 0%;
+    background: #5b4bdb;
+    border-radius: 10px;
+    transition: width 0.8s ease;
+}
+
+@media (max-width: 500px) {
+
+    .score-breakdown {
+        padding: 20px;
+    }
+
+    .score-breakdown h2 {
+        font-size: 22px;
+    }
+
+}
+.report-download {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#downloadReportButton {
+    background: #5b4bdb;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#downloadReportButton:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+@media (max-width: 500px) {
+
+    #downloadReportButton {
+        width: 100%;
+    }
+
+}
