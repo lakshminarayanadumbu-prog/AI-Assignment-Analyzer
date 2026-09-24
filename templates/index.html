@@ -56,26 +56,40 @@
 
         <div class="analyzer-box">
 
-            <label for="assignmentText">
-                Enter Assignment Text
-            </label>
-            
-            <label for="pdfFile">Upload Assignment PDF</label>
-            <input type="file" id="pdfFile" accept=".pdf">
+            <div class="input-options">
 
-            <p>OR paste your assignment text below:</p>
+                <div class="input-option">
 
+                    <h3>📄 Upload Assignment PDF</h3>
 
-            <textarea
-                id="assignmentText"
-                placeholder="Paste your assignment here..."
-            ></textarea>
+                    <input type="file" id="pdfFile" accept=".pdf">
+
+                    <p>Upload your assignment PDF to analyze it.</p>
+
+                </div>
+
+                <div class="input-divider">
+                     OR
+                </div>
+
+                <div class="input-option">
+
+                     <h3>📝 Paste Assignment Text</h3>
+
+                     <textarea
+                         id="assignmentText"
+                         placeholder="Paste your assignment here..."
+                     ></textarea>
+
+                    <p>Paste your assignment text to analyze it.</p>
+
+                </div>
+
+            </div>
 
             <button id="analyzeButton">
-                Analyze Assignment
-            </button>
-
-        </div>
+    Analyze Assignment</button>        
+</div>
 
 
         <!-- Results -->

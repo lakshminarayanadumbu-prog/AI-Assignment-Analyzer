@@ -1,3 +1,29 @@
+const pdfFile = document.getElementById("pdfFile");
+const assignmentText = document.getElementById("assignmentText");
+
+// When PDF is selected
+pdfFile.addEventListener("change", function () {
+
+    if (pdfFile.files.length > 0) {
+        assignmentText.value = "";
+        assignmentText.disabled = true;
+    } else {
+        assignmentText.disabled = false;
+    }
+
+});
+
+// When user starts typing text
+assignmentText.addEventListener("input", function () {
+
+    if (assignmentText.value.trim() !== "") {
+        pdfFile.value = "";
+        pdfFile.disabled = true;
+    } else {
+        pdfFile.disabled = false;
+    }
+
+});
 const analyzeButton = document.getElementById("analyzeButton");
 
 analyzeButton.addEventListener("click", async function () {
