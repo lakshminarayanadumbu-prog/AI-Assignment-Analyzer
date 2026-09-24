@@ -1,28 +1,81 @@
-import language_tool_python
+import re
+
 
 def check_grammar(text):
 
-    try:
+    grammar_suggestions = []
+    checked_sentences = text.split(".")
+    
+    for sentence in checked_sentences:
 
-        tool = language_tool_python.LanguageToolPublicAPI("en-US")
+        sentence = sentence.strip()
 
-        matches = tool.check(text)
+        if not sentence:
+            continue
 
-        grammar_errors = len(matches)
+        # Common grammar corrections
 
-        suggestions = []
+        patterns = [
+            (
+                r"\b(artificial intelligence|machine learning|technology|data|results|students|applications)\s+are\b",
+                "Check subject-verb agreement."
+            ),
 
-        for match in matches[:5]:
-            suggestions.append(match.message)
+            (
+                r"\b(artificial intelligence|machine learning|technology|it|this|that)\s+help\b",
+                "Use 'helps' instead of 'help' with a singular subject."
+            ),
 
-        tool.close()
+            (
+                r"\b(students|results|applications|systems|models)\s+is\b",
+                "Use 'are' instead of 'is' with a plural subject."
+            ),
 
-        return grammar_errors, suggestions
+            (
+                r"\b(results|students|applications|models)\s+shows\b",
+                "Use 'show' instead of 'shows' with a plural subject."
+            ),
 
-    except Exception:
+            (
+                r"\b(ai|AI|technology|machine learning|artificial intelligence)\s+have\b",
+                "Use 'has' instead of 'have' with a singular subject."
+            ),
 
-        return 0, ["Grammar checking is temporarily unavailable."]
+            (
+                r"\b(can|could|will|should|may|might|must)\s+\w+s\b",
+                "After a modal verb such as can, could, will, or should, use the base form of the verb."
+            ),
 
+            (
+                r"\b(many|several|various)\s+\w+\s+is\b",
+                "Check subject-verb agreement. A plural subject normally takes 'are'."
+            ),
+
+            (
+                r"\b(information|data)\s+were\b",
+                "Check the subject-verb agreement for this sentence."
+            )
+        ]
+
+        for pattern, message in patterns:
+
+            if re.search(pattern, sentence, re.IGNORECASE):
+
+                grammar_suggestions.append(
+                    f"Sentence: \"{sentence}\" → {message}"
+                )
+
+    # Remove duplicate suggestions
+    grammar_suggestions = list(dict.fromkeys(grammar_suggestions))
+
+    grammar_errors = len(grammar_suggestions)
+
+    if grammar_errors == 0:
+        grammar_suggestions = [
+            "No common grammar issues detected."
+        ]
+
+    return grammar_errors, grammar_suggestions
 from .preprocessing import clean_text, get_words
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -161,7 +214,7 @@ def analyze_text(text):
     if grammar_errors == 0:
      quality_score += 10
     elif grammar_errors <= 3:
-     quality_score += 5
+     quality_score -= min(grammar_errors*2,20)
 
     # Maximum score
     if quality_score > 100:
@@ -215,7 +268,7 @@ def analyze_text(text):
 
     grammar_score = 10
     if grammar_errors > 0:
-        grammar_score = max(0, 10 - grammar_errors)
+        grammar_score = max(0, 10 - (grammar_errors * 2))
 
     structure_score = min(len(sections) * 2, 10)
 
